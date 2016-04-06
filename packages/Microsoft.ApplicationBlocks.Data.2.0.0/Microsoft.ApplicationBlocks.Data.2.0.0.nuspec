@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.ApplicationBlocks.Data</id>
+    <version>2.0.0</version>
+    <title>Data Access Application Block for .NET</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <projectUrl>http://msdn.microsoft.com/library/en-us/dnbda/html/daab-rm.asp</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The Microsoft Data Access Application Block for .NET consists of a single .NET-based assembly, which contains all of the functionality necessary to perform the most common data access tasks against a Microsoft SQL Server 2000 database.</description>
+    <releaseNotes>The 2.0 release of the Data Access Application Block includes the following new features:
+
+●    Support for strongly typed DataSets with the FillDataset method
+●    Support for committing updates to a DataSet back to the database
+●    Additional helper methods with support for DataRow type parameters
+●    Minor bug fixes</releaseNotes>
+    <copyright>Microsoft</copyright>
+  </metadata>
+</package>
