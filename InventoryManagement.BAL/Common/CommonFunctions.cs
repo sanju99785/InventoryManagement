@@ -17,7 +17,9 @@ namespace InventoryManagement.BAL.Common
 {
     public static class CommonFunctions
     {
-        public static string ConnectionString = @"Data Source=CREDENCYS-PC\SQLEXPRESS;initial catalog=InventoryManagement;persist security info=True;user id=sa;password=sa123;";
+        //public static string ConnectionString = @"Data Source=CREDENCYS-PC\SQLEXPRESS;initial catalog=InventoryManagement;persist security info=True;user id=sa;password=sa123;";
+        public static string ConnectionString = @"Data Source=SANJU\SQLEXPRESS;initial catalog=InventoryManagement;persist security info=True;user id=sa;password=sanjay;";
+
 
         #region XML Related
 
