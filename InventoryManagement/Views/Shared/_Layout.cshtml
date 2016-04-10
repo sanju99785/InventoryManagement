@@ -5,180 +5,66 @@
     <title>@ViewBag.Title </title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    <link href="~/Content/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap/sb-admin.css" rel="stylesheet" />
-    @*<link href="~/Content/jqx/jqx.base.css" rel="stylesheet" />
-        <link href="~/Content/jqx/jqx.bootstrap.css" rel="stylesheet" />*@
+    <link href="~/Content/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Theme style -->
+    <link href="~/Content/AdminLTE/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/Content/AdminLTE/skins/_all-skins.min.css" rel="stylesheet" />
+    <link href="~/Content/AdminLTE/CustomTheme.css" rel="stylesheet" />
 
     <script src="~/Scripts/jquery-2.2.2.min.js"></script>
     <script src="~/Scripts/bootstrap/bootstrap.min.js"></script>
-    @*<script src="~/Scripts/jqx/jqx-all.js"></script>*@
+    <script src="~/Scripts/AdminLTE/app.min.js"></script>
+
+    <script src="~/Scripts/AdminLTE/dashboard.js"></script>
+    <script src="~/Scripts/AdminLTE/demo.js"></script>
 
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Scripts/angular-route.min.js"></script>
-    @*<script src="~/Scripts/jqx/jqxangular.js"></script>*@
-
+    <style>
+       
+    </style>
 </head>
-<body>
+<body class="skin-blue sidebar-mini wysihtml5-supported">
+    <input type="hidden" value="@System.Configuration.ConfigurationManager.AppSettings["WebApiPath"].ToString()" id="hdnApiPath">
+    @Html.Partial("_MenuNavigation")
+    <div class="content-wrapper" style="min-height: 916px;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="row titleHeader">
+                <div class="col-lg-12">
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            <h4>
+                                @ViewBag.Title
+                            </h4>
+                        </div>
+                        <div class="col-md-4">
 
-    <div id="wrapper">
-        <!-- Navigation -->
-        <input type="hidden" value="@System.Configuration.ConfigurationManager.AppSettings["WebApiPath"].ToString()" id="apiPath">
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">SB Admin</a>
-            </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu message-dropdown">
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-footer">
-                            <a href="#">Read All New Messages</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu alert-dropdown">
-                        <li>
-                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">View All</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            @Html.Partial("_MenuNavigation")
-            <!-- /.navbar-collapse -->
-        </nav>
-        <div id="page-wrapper">
-            <div class="container-fluid">
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="col-md-12">
-                            <div class="col-md-8">
-                                <h4>
-                                    @ViewBag.Title
-                                </h4>
-                            </div>
-                            <div class="col-md-4">
-
-                                <div class="btn-group inline pull-right">
-                                    <div class="col-md-3"><button type="button" class="btn btn-primary" id="btnAdd">Add</button></div>
-                                    <div class="col-md-3"><button type="button" class="btn btn-info" id="btnEdit">Edit</button></div>
-                                    <div class="col-md-3"><button type="button" class="btn btn-danger" id="btnDelete">Delete</button></div>
-                                </div>
+                            <div class="btn-group inline pull-right">
+                                @*<button type="button" class="btn btn-success" id="btnAdd">Add</button>*@
+                                @*<div class="col-md-3"><button type="button" class="btn btn-info" id="btnEdit">Edit</button></div>
+                                <div class="col-md-3"><button type="button" class="btn btn-danger" id="btnDelete">Delete</button></div>*@
                             </div>
                         </div>
-                        <div>
 
-                        </div>
-
-                        <div id="body">
-                            @RenderBody()
-                        </div>
                     </div>
                 </div>
-
             </div>
-            <!-- /.container-fluid -->
-        </div>
-        <!-- /#page-wrapper -->
+
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <!-- Info boxes -->
+            @RenderBody()
+
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
     </div>
 
 </body>
@@ -186,6 +72,7 @@
 </html>
 
 <script>
+    var apiPath = $('#hdnApiPath').val();
     $(document).ready(function () {
        
     })

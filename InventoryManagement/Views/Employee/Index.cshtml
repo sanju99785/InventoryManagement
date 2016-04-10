@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Employee";
 }
 
 
@@ -9,91 +9,194 @@
 
 <html>
 <body>
-    <div ng-app="EmployeeApp" class="container">
+    <div ng-app="EmployeeApp">
 
         @*<input type="text" placeholder="Search Employe" ng-model="searchStudent" />*@
         <br />
+
         <div ng-controller="EmployeeController" data-ng-init="GetEmployee()">
-            <div class="divList">
-                <p><b><i>Book List</i></b></p>
-                <table class="table table-responsive">
-                    <tr>
-                        <td><b>ID</b></td>
-                        <td><b>Title</b></td>
-                        <td><b>Author</b></td>
-                        <td><b>Publisher</b></td>
-                        <td><b>Isbn</b></td>
-                        <td><b>Action</b></td>
-                    </tr>
-                    <tr ng-repeat="book in employees">
-                        <td>
-                            {{book.EmpId}}
-                        </td>
-                        <td>
-                            {{book.Name}}
-                        </td>
-                        <td>
-                            {{book.Address}}
-                        </td>
-                        <td>
-                            {{book.Phone}}
-                        </td>
-                        <td>
-                            {{book.Mobile}}
-                        </td>
-                        <td>
-                            <span ng-click="editBook(book)" class="btn btn-primary">Edit</span>
-                            <span ng-click="deleteBook(book)" class="btn btn-danger">Delete</span>
-                        </td>
-                    </tr>
-                </table>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="box-title">
+                                <button type="button" class="btn btn-success" id="btnAdd">Add</button>
+                            </div>
+
+                            <div class="box-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                                    <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Mobile</th>
+                                        <th>Phone</th>
+                                        <th>Description</th>
+                                        <th></th>
+
+                                    </tr>
+                                    <tr ng-repeat="book in employees">
+                                        <td>
+                                            {{book.EmpId}}
+                                        </td>
+                                        <td>
+                                            {{book.Name}}
+                                        </td>
+                                        <td>
+                                            {{book.Address}}
+                                        </td>
+                                        <td>
+                                            {{book.Phone}}
+                                        </td>
+                                        <td>
+                                            {{book.Mobile}}
+                                        </td>
+                                        <td>
+                                            {{book.Description}}
+                                        </td>
+                                        <td>
+                                            <span ng-click="editBook(book)" class="btn btn-info">Edit</span>
+                                            <span ng-click="deleteBook(book)" class="btn btn-danger">Delete</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer clearfix">
+                            <ul class="pagination pagination-sm no-margin pull-right">
+                                <li><a href="#">«</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">»</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.box -->
+                </div>
             </div>
-            <span ng-click="AddBookDiv()" class="btn btn-default">
-                Add Book
-            </span>
-            <div ng-show="divBook">
-                <p class="divHead"></p>
-                <table class="table">
-                    <tr>
-                        <td><b><i>{{Action}} Book</i></b></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><b>Id</b></td>
-                        <td>
-                            <input type="text" disabled="disabled" ng-model="bookId" />
-                        </td>
-                        <td><b>Title</b></td>
-                        <td>
-                            <input type="text" ng-model="bookTitle" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><b>Author</b></td>
-                        <td>
-                            <input type="text" ng-model="bookAuthor" />
-                        </td>
-                        <td><b>Publisher</b></td>
-                        <td>
-                            <input type="text" ng-model="bookPublisher" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><b>Isbn</b></td>
-                        <td>
-                            <input type="text" ng-model="bookIsbn" />
-                        </td>
-                        <td></td>
-                        <td>
-                            <input type="button" class="btn btn-default" value="Save" ng-click="AddUpdateBook()" />
-                            <input type="button" class="btn btn-danger" value="Cancel" ng-click="Cancel()" />
-                        </td>
-                    </tr>
-                </table>
+
+            <div class="box">
+                
+                <div class="box-body">
+                    <div class="divList">
+                        <table class="table table-responsive">
+                            <tr>
+                                <td><b>ID</b></td>
+                                <td><b>Title</b></td>
+                                <td><b>Author</b></td>
+                                <td><b>Publisher</b></td>
+                                <td><b>Isbn</b></td>
+                                <td><b>Action</b></td>
+                            </tr>
+                            <tr ng-repeat="book in employees">
+                                <td>
+                                    {{book.EmpId}}
+                                </td>
+                                <td>
+                                    {{book.Name}}
+                                </td>
+                                <td>
+                                    {{book.Address}}
+                                </td>
+                                <td>
+                                    {{book.Phone}}
+                                </td>
+                                <td>
+                                    {{book.Mobile}}
+                                </td>
+                                <td>
+                                    <span ng-click="editBook(book)" class="btn btn-primary">Edit</span>
+                                    <span ng-click="deleteBook(book)" class="btn btn-danger">Delete</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <span ng-click="AddBookDiv()" class="btn btn-default">
+                        Add Book
+                    </span>
+                    <div ng-show="divBook">
+                        <p class="divHead"></p>
+                        <table class="table">
+                            <tr>
+                                <td><b><i>{{Action}} Book</i></b></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><b>Id</b></td>
+                                <td>
+                                    <input type="text" disabled="disabled" ng-model="bookId" />
+                                </td>
+                                <td><b>Title</b></td>
+                                <td>
+                                    <input type="text" ng-model="bookTitle" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Author</b></td>
+                                <td>
+                                    <input type="text" ng-model="bookAuthor" />
+                                </td>
+                                <td><b>Publisher</b></td>
+                                <td>
+                                    <input type="text" ng-model="bookPublisher" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Isbn</b></td>
+                                <td>
+                                    <input type="text" ng-model="bookIsbn" />
+                                </td>
+                                <td></td>
+                                <td>
+                                    <input type="button" class="btn btn-default" value="Save" ng-click="AddUpdateBook()" />
+                                    <input type="button" class="btn btn-danger" value="Cancel" ng-click="Cancel()" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </body>
 </html>
+
+@*------------------- Modal popup*@
+<div class="modal fade" id="empModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>
