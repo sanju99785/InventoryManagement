@@ -93,7 +93,7 @@ namespace InventoryManagement.Controllers
                         objEmployeeBA.Mobile = _objEmployeeViewModel.Phone.CheckNull();
                         objEmployeeBA.Description = _objEmployeeViewModel.Description.CheckNull();
                         //objCityMasterBA.ReturnCode = 999;
-                        var request = new RestRequest("api/EmployeeAPI/InsertUpdateEmployee", Method.POST) { RequestFormat = DataFormat.Json };
+                        var request = new RestRequest("EmployeeAPI/InsertUpdateEmployee", Method.POST) { RequestFormat = DataFormat.Json };
                         _client = new RestClient(_url);
                         request.AddBody(objEmployeeBA);
                         var response = _client.Execute(request);

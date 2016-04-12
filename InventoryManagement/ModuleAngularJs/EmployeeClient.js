@@ -1,20 +1,29 @@
 ﻿
 var EmployeeApp = angular.module('EmployeeApp', []);
-debugger;
 EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) {
     $scope.GetEmployee = function () {
-        debugger;
         EmployeeService.GetEmployee()
         .success(function (data) {
-            debugger;
             $scope.employees = data.Table;
         })
          .error(function (error) {
-             debugger
              $scope.status = 'Unable to load Student data: ' + error.message;
              console.log($scope.status);
          });
     };
+    $scope.AddClick = function () {
+
+        $('#empModal').modal('show');
+    }
+
+    $scope.editClick = function (emps) {
+        $('#empModal').modal('show');
+        $scope.Name = emps.Name;
+        $scope.Address = emps.Address;
+        $scope.Phone = emps.Phone;
+        $scope.Mobile = emps.Mobile;
+        $scope.Description = emps.Description;
+    }
 
     $scope.AddUpdateEmployee = function () {
         var emp = {
@@ -24,10 +33,10 @@ EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) 
             Mobile: $scope.Mobile,
             Description: $scope.Description
         }
-            
+
         var getData = EmployeeService.AddEditEmployee(emp);
         getData.then(function (msg) {
-            debugger;
+            $('#empModal').modal('hide');
             $scope.getStudents(5);
             Clear();
             $scope.divStudent = false;

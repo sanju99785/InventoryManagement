@@ -8,7 +8,7 @@
         debugger;
         var response = $http({
             method: 'post',
-            url: apiPath + '/Employee/SaveEmployee/',
+            url: 'http://localhost/InventoryManagement/Employee/SaveEmployee',
             data: JSON.stringify(emp),
             dataTyoe: 'json'
         });

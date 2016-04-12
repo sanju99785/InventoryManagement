@@ -122,46 +122,46 @@ namespace InventoryManagement.API.Controllers
         /// </summary>
         /// <param name="objEmployeeBA"></param>
         /// <returns></returns>
-        [HttpPost]
-        public HttpResponseMessage CheckExistEmployee(EmployeeBA objEmployeeBA)
-        {
+        //[HttpPost]
+        //public HttpResponseMessage CheckExistEmployee(EmployeeBA objEmployeeBA)
+        //{
 
-            try
-            {
-                //CityMasterBA _objCityMasterBA = new CityMasterBA();
+        //    try
+        //    {
+        //        //CityMasterBA _objCityMasterBA = new CityMasterBA();
 
-                //_objCityMasterBA.CityId = objEmployeeBA.CityId;
-                //_objCityMasterBA.CityName = objEmployeeBA.CityName.CheckNull();
-                //_objCityMasterBA.FromPincode = objEmployeeBA.FromPincode.CheckNull();
-                //_objCityMasterBA.ToPinCode = objEmployeeBA.ToPinCode.CheckNull();
-                objEmployeeBA.ReturnCode = 999;
+        //        //_objCityMasterBA.CityId = objEmployeeBA.CityId;
+        //        //_objCityMasterBA.CityName = objEmployeeBA.CityName.CheckNull();
+        //        //_objCityMasterBA.FromPincode = objEmployeeBA.FromPincode.CheckNull();
+        //        //_objCityMasterBA.ToPinCode = objEmployeeBA.ToPinCode.CheckNull();
+        //        objEmployeeBA.ReturnCode = 999;
 
 
-                int value = objEmployeeBA.InsertUpdateEmployee(objEmployeeBA);
+        //        int value = objEmployeeBA.InsertUpdateEmployee(objEmployeeBA);
 
-                if (value == -2)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, 2);
-                }
-                else if (value == -3)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, 3);
-                }
-                else if (value == -4)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, 4);
-                }
-                else
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, 1);
-                }
+        //        if (value == -2)
+        //        {
+        //            return Request.CreateResponse(HttpStatusCode.OK, 2);
+        //        }
+        //        else if (value == -3)
+        //        {
+        //            return Request.CreateResponse(HttpStatusCode.OK, 3);
+        //        }
+        //        else if (value == -4)
+        //        {
+        //            return Request.CreateResponse(HttpStatusCode.OK, 4);
+        //        }
+        //        else
+        //        {
+        //            return Request.CreateResponse(HttpStatusCode.OK, 1);
+        //        }
 
-            }
-            catch (Exception ex)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, new ErrorLogDetails() { Message = CommonMessages.DEFAULT_ERRORMESSAGE, StackTrace = ex.ToString() });
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.InternalServerError, new ErrorLogDetails() { Message = CommonMessages.DEFAULT_ERRORMESSAGE, StackTrace = ex.ToString() });
+        //    }
+        //}
 
     }
 }
