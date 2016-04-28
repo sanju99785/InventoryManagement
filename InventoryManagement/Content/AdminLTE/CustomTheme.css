@@ -7,3 +7,12 @@
     background-color: #f5f5f5;
     border-radius: 4px;
 }
+
+
+    .deleteModal .modal-header {
+        padding: 6px;
+    }
+
+    .deleteModal .modal-footer {
+        padding: 6px;
+    }

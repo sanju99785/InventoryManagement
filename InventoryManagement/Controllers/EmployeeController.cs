@@ -36,6 +36,11 @@ namespace InventoryManagement.Controllers
 
         }
 
+        public ActionResult test()
+        {
+            return View();
+        }
+
         public ActionResult InsertUdateEmployee(long EmpId = 0)
         {
             try

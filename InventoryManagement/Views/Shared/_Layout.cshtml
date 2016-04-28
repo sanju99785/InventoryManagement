@@ -16,6 +16,7 @@
     <link href="~/Content/AdminLTE/CustomTheme.css" rel="stylesheet" />
 
     <script src="~/Scripts/jquery-2.2.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/bootstrap/bootstrap.min.js"></script>
     <script src="~/Scripts/AdminLTE/app.min.js"></script>
 
@@ -24,6 +25,7 @@
 
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Scripts/angular-route.min.js"></script>
+    <script src="~/Scripts/_global.js"></script>
     <style>
        
     </style>
@@ -31,6 +33,7 @@
 <body class="skin-blue sidebar-mini wysihtml5-supported">
     <input type="hidden" value="@System.Configuration.ConfigurationManager.AppSettings["WebApiPath"].ToString()" id="hdnApiPath">
     @Html.Partial("_MenuNavigation")
+    @Html.Partial("_CommonWindows")
     <div class="content-wrapper" style="min-height: 916px;">
         <!-- Content Header (Page header) -->
         <section class="content-header">

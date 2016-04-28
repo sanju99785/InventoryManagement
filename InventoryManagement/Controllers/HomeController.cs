@@ -16,5 +16,10 @@ namespace InventoryManagement.Controllers
             return View();
         }
 
+        public ActionResult Home1()
+        {
+            return View();
+        }
+
     }
 }

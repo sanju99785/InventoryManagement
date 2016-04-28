@@ -11,12 +11,13 @@ EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) 
              console.log($scope.status);
          });
     };
-    $scope.AddClick = function () {
-
+    $scope.AddClick = function (e) {
         $('#empModal').modal('show');
+        $('#empModal .modal-title')[0].textContent = "Add";//// Set Title Popup
     }
 
     $scope.editClick = function (emps) {
+        $('#empModal .modal-title')[0].textContent = "Edit"; //// Set Title Popup
         $('#empModal').modal('show');
         $scope.Name = emps.Name;
         $scope.Address = emps.Address;
@@ -36,7 +37,7 @@ EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) 
 
         var getData = EmployeeService.AddEditEmployee(emp);
         getData.then(function (msg) {
-            $('#empModal').modal('hide');
+            //$('#empModal').modal('hide');
             $scope.getStudents(5);
             Clear();
             $scope.divStudent = false;
@@ -44,5 +45,18 @@ EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) 
         }, function () {
             alert('Error in adding record');
         });
+    }
+
+    $scope.deleteClick = function (data) {
+        var isDelete = DeleteCall(data);
+        debugger;
+        console.log(isDelete);
+    }
+
+    $scope.test = function () {
+        debugger;
+        var isDelete = DeleteCall(data);
+        debugger;
+        console.log(isDelete);
     }
 })
