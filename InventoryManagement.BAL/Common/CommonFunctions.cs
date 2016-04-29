@@ -792,5 +792,13 @@ namespace InventoryManagement.BAL.Common
             }
             return jsSerializer.Serialize(parentRow);
         }
+
+        public const string RecordCreatedSuccess = "Record Created Successfully";
+        public const string RecordCreatedFail = "Record Not Created";
+        public const string RecordUpdateSuccess = "Record Updated Successfully";
+        public const string RecordUpdateFail = "Record Not Updated";
+        public const string RecordDeletedSuccess = "Record Deleted Successfully";
+        public const string RecordDeletedFail = "Record Not Deleted";
+        public const string RecordExist= "Record Already Exist";
     }
 }

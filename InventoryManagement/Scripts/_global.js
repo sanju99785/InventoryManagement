@@ -1,11 +1,13 @@
-﻿var isDelete = false;
+﻿function ShowError(message) {
+    $("#warning").empty();
+    $("#warning").append('<div class="alert alert-danger" id="alertwarning">' + message + '</div>');
+    $("#alertwarning").alert();
+    window.setTimeout(function () { $("#alertwarning").alert('close'); }, 4000);
+}
 
-function DeleteCall(data) {
-    var isDelete = false;
-    $('#deleteModal').modal('show');
-    $('#commonDeleteYes').click(function () {
-        debugger;
-        isDelete = true;
-    })
-    return isDelete;
+function ShowSuccess(message) {
+    $("#warning").empty();
+    $("#warning").append('<div class="alert alert-success" id="alertwarning">' + message + '</div>');
+    $("#alertwarning").alert();
+    window.setTimeout(function () { $("#alertwarning").alert('close'); }, 4000);
 }

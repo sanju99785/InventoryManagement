@@ -41,14 +41,14 @@ namespace InventoryManagement.Controllers
             return View();
         }
 
-        public ActionResult InsertUdateEmployee(long EmpId = 0)
+        public JsonResult InsertUdateEmployee(long EmpId = 0)
         {
             try
             {
                 EmployeeViewModel objEmployeeViewModel = new EmployeeViewModel();
                 if (EmpId > 0)
                 {
-                    var request = new RestRequest("api/EmployeeAPI/GetEmployee", Method.GET);
+                    var request = new RestRequest("EmployeeAPI/GetEmployee", Method.GET);
                     request.Parameters.Clear();
                     _client = new RestClient(_url);
                     _client.FollowRedirects = false;
@@ -58,6 +58,7 @@ namespace InventoryManagement.Controllers
 
                     JavaScriptSerializer j = new JavaScriptSerializer();
                     var JSONObj = j.Deserialize<Dictionary<string, List<Dictionary<String, Object>>>>(response.Content);
+
 
                     foreach (var item in JSONObj)
                     {
@@ -74,7 +75,7 @@ namespace InventoryManagement.Controllers
                     }
                 }
 
-                return View(objEmployeeViewModel);
+                return Json(objEmployeeViewModel, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
@@ -82,43 +83,42 @@ namespace InventoryManagement.Controllers
             }
         }
 
-        public ActionResult SaveEmployee(EmployeeViewModel _objEmployeeViewModel)
+        public JsonResult SaveEmployee(EmployeeViewModel _objEmployeeViewModel)
         {
             try
             {
+                String values = string.Empty;
                 if (_objEmployeeViewModel != null)
                 {
-                    if (ModelState.IsValid)
-                    {
-                        EmployeeBA objEmployeeBA = new EmployeeBA();
-                        objEmployeeBA.EmpId = _objEmployeeViewModel.EmpId.CheckNull();
-                        objEmployeeBA.Name = _objEmployeeViewModel.Name.CheckNull();
-                        objEmployeeBA.Address = _objEmployeeViewModel.Address.CheckNull();
-                        objEmployeeBA.Phone = _objEmployeeViewModel.Phone.CheckNull();
-                        objEmployeeBA.Mobile = _objEmployeeViewModel.Phone.CheckNull();
-                        objEmployeeBA.Description = _objEmployeeViewModel.Description.CheckNull();
-                        //objCityMasterBA.ReturnCode = 999;
-                        var request = new RestRequest("EmployeeAPI/InsertUpdateEmployee", Method.POST) { RequestFormat = DataFormat.Json };
-                        _client = new RestClient(_url);
-                        request.AddBody(objEmployeeBA);
-                        var response = _client.Execute(request);
+                    
+                    EmployeeBA objEmployeeBA = new EmployeeBA();
+                    objEmployeeBA.EmpId = _objEmployeeViewModel.EmpId.CheckNull();
+                    objEmployeeBA.Name = _objEmployeeViewModel.Name.CheckNull();
+                    objEmployeeBA.Address = _objEmployeeViewModel.Address.CheckNull();
+                    objEmployeeBA.Phone = _objEmployeeViewModel.Phone.CheckNull();
+                    objEmployeeBA.Mobile = _objEmployeeViewModel.Phone.CheckNull();
+                    objEmployeeBA.Description = _objEmployeeViewModel.Description.CheckNull();
+                    //objCityMasterBA.ReturnCode = 999;
+                    var request = new RestRequest("EmployeeAPI/InsertUpdateEmployee", Method.POST) { RequestFormat = DataFormat.Json };
+                    _client = new RestClient(_url);
+                    request.AddBody(objEmployeeBA);
+                    var response = _client.Execute(request);
 
-                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                        {
-                            var serializer = new JavaScriptSerializer(); //using System.Web.Script.Serialization;
-                            String values = serializer.Deserialize<String>(response.Content);
-                            TempData["SuccessMessage"] = values;
-                        }
-                        else
-                        {
-                            var serializer = new JavaScriptSerializer(); //using System.Web.Script.Serialization;
-                            String values = serializer.Deserialize<String>(response.Content);
-                            TempData["WarningMessage"] = values;
-                        }
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var serializer = new JavaScriptSerializer(); //using System.Web.Script.Serialization;
+                        values = serializer.Deserialize<String>(response.Content);
+                        TempData["SuccessMessage"] = values;
+                    }
+                    else
+                    {
+                        var serializer = new JavaScriptSerializer(); //using System.Web.Script.Serialization;
+                        values = serializer.Deserialize<String>(response.Content);
+                        TempData["WarningMessage"] = values;
                     }
                 }
 
-                return RedirectToAction("Index");
+                return Json(values, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {

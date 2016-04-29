@@ -6,12 +6,10 @@
 <script src="~/ModuleAngularJs/EmployeeClient.js"></script>
 <script src="~/ModuleAngularJs/EmployeeService.js"></script>
 
-
 <html>
 <body ng-controller="EmployeeController" ng-app="EmployeeApp">
     <div>
-
-        @*<input type="text" placeholder="Search Employe" ng-model="searchStudent" />*@
+      
         <br />
 
         <div data-ng-init="GetEmployee()">
@@ -48,7 +46,7 @@
                                         <th></th>
 
                                     </tr>
-                                    <tr ng-repeat="emps in employees">
+                                    <tr ng-repeat="emps in employees |  orderBy: 'Name | '">
                                         <td>
                                             {{emps.EmpId}}
                                         </td>
@@ -75,7 +73,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        <button type="button" class="btn btn-success" id="btnAdd" ng-click="test()">Add</button>
                         <!-- /.box-body -->
                         <div class="box-footer clearfix">
                             <ul class="pagination pagination-sm no-margin pull-right">
@@ -90,7 +87,9 @@
                     <!-- /.box -->
                 </div>
             </div>
+         
         </div>
+        @Html.Partial("_CommonWindows")
     </div>
     <div class="modal fade" id="empModal" role="dialog">
         <div class="modal-dialog">
@@ -118,13 +117,13 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Mobile</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" maxlength="12" ng-model="Mobile">
+                                <input type="text" class="form-control" maxlength="12" ng-model="Mobile">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Phone</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" maxlength="12" ng-model="Phone">
+                                <input type="text" class="form-control" maxlength="12" ng-model="Phone">
                             </div>
                         </div>
                         <div class="form-group">

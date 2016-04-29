@@ -27,21 +27,23 @@
     <script src="~/Scripts/angular-route.min.js"></script>
     <script src="~/Scripts/_global.js"></script>
     <style>
-       
     </style>
 </head>
+
 <body class="skin-blue sidebar-mini wysihtml5-supported">
+    <div id="loader" class="se-pre-con"></div>
     <input type="hidden" value="@System.Configuration.ConfigurationManager.AppSettings["WebApiPath"].ToString()" id="hdnApiPath">
+    <input type="hidden" value="@System.Configuration.ConfigurationManager.AppSettings["WebPath"].ToString()" id="hdnPath">
+    <div id="warning">
+    </div>
     @Html.Partial("_MenuNavigation")
-    @Html.Partial("_CommonWindows")
+
     <div class="content-wrapper" style="min-height: 916px;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="row titleHeader">
-                @*<div class="alert alert-success">
-                    <div  class="close" data-dismiss="alert" aria-label="close">&times;</div>
-                    <strong>Success!</strong> Indicates a successful or positive action.
-                </div>*@
+
+
                 <div class="col-lg-12">
                     <div class="col-md-12">
                         <div class="col-md-8">
@@ -54,7 +56,7 @@
                             <div class="btn-group inline pull-right">
                                 @*<button type="button" class="btn btn-success" id="btnAdd">Add</button>*@
                                 @*<div class="col-md-3"><button type="button" class="btn btn-info" id="btnEdit">Edit</button></div>
-                                <div class="col-md-3"><button type="button" class="btn btn-danger" id="btnDelete">Delete</button></div>*@
+                                    <div class="col-md-3"><button type="button" class="btn btn-danger" id="btnDelete">Delete</button></div>*@
                             </div>
                         </div>
 
@@ -80,7 +82,14 @@
 
 <script>
     var apiPath = $('#hdnApiPath').val();
+    var webPath = $('#hdnPath').val();
     $(document).ready(function () {
-       
-    })
+        RecordCreatedSuccess = '@InventoryManagement.BAL.Common.CommonFunctions.RecordCreatedSuccess'
+        RecordCreatedFail = '@InventoryManagement.BAL.Common.CommonFunctions.RecordCreatedFail'
+        RecordUpdateSuccess = '@InventoryManagement.BAL.Common.CommonFunctions.RecordUpdateSuccess'
+        RecordUpdateFail = '@InventoryManagement.BAL.Common.CommonFunctions.RecordUpdateFail'
+        RecordDeletedSuccess = '@InventoryManagement.BAL.Common.CommonFunctions.RecordDeletedSuccess'
+        RecordDeletedFail = '@InventoryManagement.BAL.Common.CommonFunctions.RecordDeletedFail'
+        RecordExist = '@InventoryManagement.BAL.Common.CommonFunctions.RecordExist'
+    });
 </script>

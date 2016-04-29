@@ -19,6 +19,7 @@ namespace InventoryManagement.API.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class EmployeeAPIController : ApiController
     {
+        [System.Web.Http.HttpGet]
         public HttpResponseMessage GetEmployee(long EmpId = 0)
         {
 
@@ -48,22 +49,7 @@ namespace InventoryManagement.API.Controllers
         {
             try
             {
-                //EmployeeBA _objEmployeeBA = new EmployeeBA();
-                //if (objEmployeeBA != null)
-                //{
-                //    _objCityMasterBA.CityId = objEmployeeBA.CityId.CheckNull();
-                //    _objCityMasterBA.CityName = objEmployeeBA.CityName.CheckNull();
-                //    _objCityMasterBA.StateId = objEmployeeBA.StateId.CheckNull();
-                //    _objCityMasterBA.CountryId = objEmployeeBA.CountryId.CheckNull();
-                //    _objCityMasterBA.FromPincode = objEmployeeBA.FromPincode.CheckNull();
-                //    _objCityMasterBA.ToPinCode = objEmployeeBA.ToPinCode.CheckNull();
-                //    _objCityMasterBA.IsActive = objEmployeeBA.IsActive.CheckNull();
-                //    _objCityMasterBA.By = objEmployeeBA.By.CheckNull();
-
-                //}
-
                 int value = objEmployeeBA.InsertUpdateEmployee(objEmployeeBA);
-
 
                 switch (value)
                 {
@@ -91,7 +77,7 @@ namespace InventoryManagement.API.Controllers
         /// </summary>
         /// <param name="CityId"></param>
         /// <returns></returns>
-        [HttpGet]
+        [System.Web.Http.HttpGet]
         public HttpResponseMessage DeleteEmployee(long EmpId)
         {
             try
@@ -122,46 +108,28 @@ namespace InventoryManagement.API.Controllers
         /// </summary>
         /// <param name="objEmployeeBA"></param>
         /// <returns></returns>
-        //[HttpPost]
-        //public HttpResponseMessage CheckExistEmployee(EmployeeBA objEmployeeBA)
-        //{
+        [HttpPost]
+        public HttpResponseMessage CheckExistEmployee(EmployeeBA objEmployeeBA)
+        {
 
-        //    try
-        //    {
-        //        //CityMasterBA _objCityMasterBA = new CityMasterBA();
+            try
+            {
+                //CityMasterBA _objCityMasterBA = new CityMasterBA();
+                //objEmployeeBA.EmpId=objEmployeeBA.EmpId
+                //_objCityMasterBA.CityId = objEmployeeBA.CityId;
+                //_objCityMasterBA.CityName = objEmployeeBA.CityName.CheckNull();
+                //_objCityMasterBA.FromPincode = objEmployeeBA.FromPincode.CheckNull();
+                //_objCityMasterBA.ToPinCode = objEmployeeBA.ToPinCode.CheckNull();
+                objEmployeeBA.ReturnCode = 999;
 
-        //        //_objCityMasterBA.CityId = objEmployeeBA.CityId;
-        //        //_objCityMasterBA.CityName = objEmployeeBA.CityName.CheckNull();
-        //        //_objCityMasterBA.FromPincode = objEmployeeBA.FromPincode.CheckNull();
-        //        //_objCityMasterBA.ToPinCode = objEmployeeBA.ToPinCode.CheckNull();
-        //        objEmployeeBA.ReturnCode = 999;
-
-
-        //        int value = objEmployeeBA.InsertUpdateEmployee(objEmployeeBA);
-
-        //        if (value == -2)
-        //        {
-        //            return Request.CreateResponse(HttpStatusCode.OK, 2);
-        //        }
-        //        else if (value == -3)
-        //        {
-        //            return Request.CreateResponse(HttpStatusCode.OK, 3);
-        //        }
-        //        else if (value == -4)
-        //        {
-        //            return Request.CreateResponse(HttpStatusCode.OK, 4);
-        //        }
-        //        else
-        //        {
-        //            return Request.CreateResponse(HttpStatusCode.OK, 1);
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Request.CreateResponse(HttpStatusCode.InternalServerError, new ErrorLogDetails() { Message = CommonMessages.DEFAULT_ERRORMESSAGE, StackTrace = ex.ToString() });
-        //    }
-        //}
+                int value = objEmployeeBA.InsertUpdateEmployee(objEmployeeBA);
+                return Request.CreateResponse(HttpStatusCode.OK, value);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new ErrorLogDetails() { Message = CommonMessages.DEFAULT_ERRORMESSAGE, StackTrace = ex.ToString() });
+            }
+        }
 
     }
 }
