@@ -9,7 +9,7 @@
 <html>
 <body ng-controller="EmployeeController" ng-app="EmployeeApp">
     <div>
-      
+
         <br />
 
         <div data-ng-init="GetEmployee()">
@@ -24,7 +24,7 @@
 
                             <div class="box-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" ng-model="filterValue">
 
                                     <div class="input-group-btn">
                                         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
@@ -46,7 +46,7 @@
                                         <th></th>
 
                                     </tr>
-                                    <tr ng-repeat="emps in employees |  orderBy: 'Name | '">
+                                    <tr ng-repeat="emps in employees | filter: filterValue |  orderBy: 'Name '">
                                         <td>
                                             {{emps.EmpId}}
                                         </td>
@@ -87,7 +87,7 @@
                     <!-- /.box -->
                 </div>
             </div>
-         
+
         </div>
         @Html.Partial("_CommonWindows")
     </div>
@@ -141,12 +141,11 @@
 
         </div>
     </div>
+    <div class="gridStyle" ng-grid="gridOptions"></div>
 </body>
 @*------------------- Modal popup*@
 
+
+
 </html>
-
-
-
-
 

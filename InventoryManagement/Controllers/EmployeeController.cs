@@ -91,6 +91,7 @@ namespace InventoryManagement.Controllers
                 if (_objEmployeeViewModel != null)
                 {
                     
+
                     EmployeeBA objEmployeeBA = new EmployeeBA();
                     objEmployeeBA.EmpId = _objEmployeeViewModel.EmpId.CheckNull();
                     objEmployeeBA.Name = _objEmployeeViewModel.Name.CheckNull();

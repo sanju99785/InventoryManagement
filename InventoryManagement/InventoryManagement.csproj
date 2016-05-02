@@ -173,6 +173,7 @@
     <Content Include="Content\bootstrap\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\ajax-loader.gif" />
+    <Content Include="Content\ng-grid\ng-grid.css" />
     <Content Include="Global.asax" />
     <Content Include="ModuleAngularJs\EmployeeClient.js" />
     <Content Include="ModuleAngularJs\EmployeeService.js" />
@@ -187,6 +188,8 @@
     <Content Include="Scripts\jquery-2.2.2.js" />
     <Content Include="Scripts\jquery-2.2.2.min.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\ng-grid\ng-grid-layout.js" />
+    <Content Include="Scripts\ng-grid\ng-grid.debug.js" />
     <Content Include="Scripts\_global.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

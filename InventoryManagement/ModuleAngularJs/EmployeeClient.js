@@ -1,7 +1,12 @@
 ﻿
-var EmployeeApp = angular.module('EmployeeApp', []);
+var app = angular.module('myApp', ['ngGrid']);
+
+
+var EmployeeApp = angular.module('EmployeeApp', ['ngGrid']);
 EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) {
     $scope.EmployeeId = 0;
+
+
     $scope.GetEmployee = function () {
         $('#loader').show();
         EmployeeService.GetEmployee()
@@ -14,7 +19,24 @@ EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) 
              $scope.status = 'Unable to load Student data: ' + error.message;
          });
     };
+    $scope.gridOptions = {
+        data: 'employees',
+        multiSelect: false,
+        //enableRowSelection: false,
+        //enableCellEditOnFocus: true,
+        columnDefs: [
+                              { field: 'Name', displayName: 'Name' },
+                              { field: 'Address', displayName: 'Address' },
+                              { field: 'Phone', displayName: 'Phone' },
+                              { field: 'Mobile', displayName: 'Mobile' },
+                              { field: 'Description', displayName: 'Description' },
 
+                              {
+                                  field: '', displayName: 'Save',
+                                  cellTemplate: '<span ng-click="editClick(row)" class="btn btn-info">Edit</span><span ng-click="deleteClick(row)" class="btn btn-danger">Delete</span>'
+                              }
+        ]
+    };
     $scope.AddClick = function (e) {
         $scope.Clear();
         $('#empModal').modal('show');
@@ -22,9 +44,10 @@ EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) 
     }
 
     $scope.editClick = function (emps) {
+        debugger;
         $('#empModal .modal-title')[0].textContent = "Edit"; //// Set Title Popup
         $scope.Clear();
-        var empData = EmployeeService.GetEmployeeById(emps.EmpId).success(function (data) {
+        var empData = EmployeeService.GetEmployeeById(emps.entity.EmpId).success(function (data) {
             $('#loader').hide();
             $('#empModal').modal('show');
             $scope.EmpId = data.EmpId;
