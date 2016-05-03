@@ -5,7 +5,9 @@
 
 <script src="~/ModuleAngularJs/EmployeeClient.js"></script>
 <script src="~/ModuleAngularJs/EmployeeService.js"></script>
+<style>
 
+</style>
 <html>
 <body ng-controller="EmployeeController" ng-app="EmployeeApp">
     <div>
@@ -141,7 +143,9 @@
 
         </div>
     </div>
-    <div class="gridStyle" ng-grid="gridOptions"></div>
+    <div id="grid1" class="gridStyle" ui-grid="gridOpts"></div>
+    @*<div id="grid1" ui-grid="gridOptions1" class="grid"></div>*@
+
 </body>
 @*------------------- Modal popup*@
 

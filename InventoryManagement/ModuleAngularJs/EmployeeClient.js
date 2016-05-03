@@ -1,8 +1,8 @@
 ﻿
-var app = angular.module('myApp', ['ngGrid']);
+//var app = angular.module('myApp', ['ngGrid']);
 
 
-var EmployeeApp = angular.module('EmployeeApp', ['ngGrid']);
+var EmployeeApp = angular.module('EmployeeApp', ['ui.grid', 'ui.grid.edit']);
 EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) {
     $scope.EmployeeId = 0;
 
@@ -12,20 +12,21 @@ EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) 
         EmployeeService.GetEmployee()
         .success(function (data) {
             $('#loader').hide();
+            debugger
             $scope.employees = data.Table;
+            $scope.gridOptions1.data = data.Table;
         })
          .error(function (error) {
              $('#loader').hide();
              $scope.status = 'Unable to load Student data: ' + error.message;
          });
     };
-    $scope.gridOptions = {
-        data: 'employees',
-        multiSelect: false,
-        //enableRowSelection: false,
-        //enableCellEditOnFocus: true,
+
+    debugger
+    $scope.gridOptions1 = {
+        enableSorting: true,
         columnDefs: [
-                              { field: 'Name', displayName: 'Name' },
+                              { field: 'Name', displayName: 'Name', rowHeight: '560px' },
                               { field: 'Address', displayName: 'Address' },
                               { field: 'Phone', displayName: 'Phone' },
                               { field: 'Mobile', displayName: 'Mobile' },
@@ -35,8 +36,60 @@ EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) 
                                   field: '', displayName: 'Save',
                                   cellTemplate: '<span ng-click="editClick(row)" class="btn btn-info">Edit</span><span ng-click="deleteClick(row)" class="btn btn-danger">Delete</span>'
                               }
-        ]
+        ],
+    
     };
+
+    var columnDefs1 = [
+    { name: 'firstName' },
+    { name: 'lastName' },
+    { name: 'company' },
+    { name: 'gender' }
+    ];
+
+    var data1 = [
+      {
+          "firstName": "Cox",
+          "lastName": "Carney",
+          "company": "Enormo",
+          "gender": "male"
+      },
+      {
+          "firstName": "Lorraine",
+          "lastName": "Wise",
+          "company": "Comveyer",
+          "gender": "female"
+      },
+      {
+          "firstName": "Nancy",
+          "lastName": "Waters",
+          "company": "Fuelton",
+          "gender": "female"
+      },
+      {
+          "firstName": "Misty",
+          "lastName": "Oneill",
+          "company": "Letpro",
+          "gender": "female"
+      }
+    ];
+
+    var origdata1 = angular.copy(data1);
+
+    var columnDefs2 = [
+      { name: 'firstName' },
+      { name: 'lastName' },
+      { name: 'company' },
+      { name: 'employed' }
+    ];
+
+    $scope.gridOpts = {
+        columnDefs: columnDefs1,
+        data: data1
+    };
+
+
+
     $scope.AddClick = function (e) {
         $scope.Clear();
         $('#empModal').modal('show');
