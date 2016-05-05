@@ -27,11 +27,7 @@ namespace InventoryManagement.API.Controllers
             {
                 EmployeeBA objEmployeeBA = new EmployeeBA();
                 DataSet ds = objEmployeeBA.GetEmployee(EmpId.CheckNull());
-                if (CommonFunctions.ValidateDataset(ds))
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, ds);
-                }
-                return Request.CreateResponse(HttpStatusCode.NotFound, CommonMessages.NoDataFoundMessage);
+                return Request.CreateResponse(HttpStatusCode.OK, ds);
             }
             catch (Exception ex)
             {

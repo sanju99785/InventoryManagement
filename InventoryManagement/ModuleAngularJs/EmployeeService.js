@@ -1,6 +1,11 @@
 ﻿EmployeeApp.service("EmployeeService", ['$http', function ($http) {
     this.GetEmployee = function () {
-        return $http.get(apiPath + 'EmployeeAPI/GetEmployee/')
+        return $http({
+            method: 'get',
+            url: apiPath + 'EmployeeAPI/GetEmployee/',
+            dataType: 'json'
+        });
+
     };
 
     this.GetEmployeeById = function (EmpId) {
@@ -14,12 +19,10 @@
             data: JSON.stringify(emp),
             dataType: 'json'
         });
-        debugger
         return response;
     }
 
     this.CheckExistEmployee = function (emps) {
-        debugger;
         var response = $http({
             method: 'post',
             async: false,
@@ -27,7 +30,6 @@
             data: JSON.stringify(emps),
             dataType: 'json'
         });
-        debugger
         return response;
     }
 

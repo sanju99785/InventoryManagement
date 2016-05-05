@@ -30,15 +30,13 @@ namespace InventoryManagement.BAL
         /// </summary>
         /// <param name="EmpId">The emp identifier.</param>
         /// <returns></returns>
-        public DataSet GetEmployee(Int64 EmpId = 0)
+        public DataSet GetEmployee(long EmpId = 0, String searchValue = "")
         {
             try
             {
                 GenericDALAccess objGenericDALAccess = new GenericDALAccess();
                 List<SqlParameter> liSqlParameter = new List<SqlParameter>();
-                // liSqlParameter.Add(new SqlParameter() { ParameterName = "@ProgramId", Value = ProgramId.CheckNull() });
                 liSqlParameter.Add(new SqlParameter() { ParameterName = "@EmpId", Value = EmpId.CheckNull() });
-
                 return objGenericDALAccess.GetData("GetEmployee", liSqlParameter);
             }
             catch (Exception)

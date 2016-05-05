@@ -1,106 +1,65 @@
-﻿
-//var app = angular.module('myApp', ['ngGrid']);
+﻿var EmployeeApp = angular.module('EmployeeApp', ['ui.grid', 'ui.grid.edit']);
 
-
-var EmployeeApp = angular.module('EmployeeApp', ['ui.grid', 'ui.grid.edit']);
-EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) {
+EmployeeApp.controller('EmployeeController', function ($scope, $filter, EmployeeService) {
     $scope.EmployeeId = 0;
-
 
     $scope.GetEmployee = function () {
         $('#loader').show();
+        $scope.gridOptions.data = [];
+        if (typeof  $scope.filterValue === 'undefined') {
+            $scope.filterValue = "";
+        }
+
         EmployeeService.GetEmployee()
         .success(function (data) {
             $('#loader').hide();
-            debugger
             $scope.employees = data.Table;
-            $scope.gridOptions1.data = data.Table;
+            $scope.gridOptions.data = data.Table;
         })
          .error(function (error) {
+
              $('#loader').hide();
              $scope.status = 'Unable to load Student data: ' + error.message;
          });
     };
 
-    debugger
-    $scope.gridOptions1 = {
+
+    $scope.SearchGrid = function () {
+        debugger;
+        $scope.gridOptions.data = $filter('filter')($scope.employees, $scope.filterValue, undefined);
+    };
+
+    $scope.gridOptions = {
         enableSorting: true,
+        rowHeight: 40,
+        enableHighlighting: true,
         columnDefs: [
-                              { field: 'Name', displayName: 'Name', rowHeight: '560px' },
+                              { field: 'Name', displayName: 'Name' },
                               { field: 'Address', displayName: 'Address' },
                               { field: 'Phone', displayName: 'Phone' },
                               { field: 'Mobile', displayName: 'Mobile' },
                               { field: 'Description', displayName: 'Description' },
-
-                              {
-                                  field: '', displayName: 'Save',
-                                  cellTemplate: '<span ng-click="editClick(row)" class="btn btn-info">Edit</span><span ng-click="deleteClick(row)" class="btn btn-danger">Delete</span>'
-                              }
+                               {
+                                   field: 'EmpId', name: "", enableSorting: false,
+                                   cellTemplate: '<div class="action-button-padding"><span ng-click="grid.appScope.EditClick(row.entity)" class="action-button-margin btn btn-info ">Edit</span><span ng-click="grid.appScope.DeleteClick(row.entity)" class="action-button-margin btn btn-danger">Delete</span></div> '
+                               }
         ],
-    
+        rowTemplate: "<div ng-dblclick=\"grid.appScope.EditClick(row.entity)\" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell dbl-click-row></div>"
     };
-
-    var columnDefs1 = [
-    { name: 'firstName' },
-    { name: 'lastName' },
-    { name: 'company' },
-    { name: 'gender' }
-    ];
-
-    var data1 = [
-      {
-          "firstName": "Cox",
-          "lastName": "Carney",
-          "company": "Enormo",
-          "gender": "male"
-      },
-      {
-          "firstName": "Lorraine",
-          "lastName": "Wise",
-          "company": "Comveyer",
-          "gender": "female"
-      },
-      {
-          "firstName": "Nancy",
-          "lastName": "Waters",
-          "company": "Fuelton",
-          "gender": "female"
-      },
-      {
-          "firstName": "Misty",
-          "lastName": "Oneill",
-          "company": "Letpro",
-          "gender": "female"
-      }
-    ];
-
-    var origdata1 = angular.copy(data1);
-
-    var columnDefs2 = [
-      { name: 'firstName' },
-      { name: 'lastName' },
-      { name: 'company' },
-      { name: 'employed' }
-    ];
-
-    $scope.gridOpts = {
-        columnDefs: columnDefs1,
-        data: data1
-    };
-
 
 
     $scope.AddClick = function (e) {
         $scope.Clear();
+        $scope.popupTitle = "Add";//// Set Title Popup
         $('#empModal').modal('show');
-        $('#empModal .modal-title')[0].textContent = "Add";//// Set Title Popup
     }
 
-    $scope.editClick = function (emps) {
-        debugger;
-        $('#empModal .modal-title')[0].textContent = "Edit"; //// Set Title Popup
+
+    $scope.EditClick = function (emps) {
+
+        $scope.popupTitle = "Edit"; //// Set Title Popup
         $scope.Clear();
-        var empData = EmployeeService.GetEmployeeById(emps.entity.EmpId).success(function (data) {
+        var empData = EmployeeService.GetEmployeeById(emps.EmpId).success(function (data) {
             $('#loader').hide();
             $('#empModal').modal('show');
             $scope.EmpId = data.EmpId;
@@ -148,12 +107,12 @@ EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) 
 
     }
 
-    $scope.deleteClick = function (data) {
+    $scope.DeleteClick = function (data) {
         $scope.EmployeeId = data.EmpId;
         $('#deleteModal').modal('show');
     }
 
-    $scope.deleteConfirm = function () {
+    $scope.DeleteConfirm = function () {
         if ($scope.EmployeeId > 0) {
             $('#loader').show();
             var getData = EmployeeService.DeleteEmployee($scope.EmployeeId);
@@ -162,7 +121,6 @@ EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) 
                 $('#loader').hide();
                 $scope.GetEmployee();
                 ShowSuccess(RecordDeletedSuccess);
-                //$scope.message = "Student Deleted Successfully";
             }, function (e, e, e) {
                 ShowError(RecordDeletedFail);
                 $('#loader').hide();
@@ -170,6 +128,10 @@ EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) 
         }
     }
 
+    $scope.ClearSearch = function () {
+        $scope.filterValue = "";
+        $scope.gridOptions.data = $filter('filter')($scope.employees, "", undefined);
+    }
     $scope.Clear = function () {
         $scope.EmpId = "";
         $scope.Name = "";

@@ -61,8 +61,17 @@
     height: 300px;
 }
 
-/*Fixed Postio*/
+/*Fixed Postion*/
 .afix {
     position: fixed;
     transform: translate3d(0, 0, 0);
+}
+
+/*GRid Css*/
+.action-button-margin {
+    margin-left: 2%;
+}
+
+.action-button-padding {
+    padding: 2%;
 }

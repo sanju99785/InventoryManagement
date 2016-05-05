@@ -2,12 +2,9 @@
     ViewBag.Title = "Employee";
 }
 
-
 <script src="~/ModuleAngularJs/EmployeeClient.js"></script>
 <script src="~/ModuleAngularJs/EmployeeService.js"></script>
-<style>
 
-</style>
 <html>
 <body ng-controller="EmployeeController" ng-app="EmployeeApp">
     <div>
@@ -16,83 +13,122 @@
 
         <div data-ng-init="GetEmployee()">
 
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="box">
-                        <div class="box-header">
-                            <div class="box-title">
-                                <button type="button" class="btn btn-success" id="btnAdd" ng-click="AddClick(true)">Add</button>
-                            </div>
+            @*<div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <div class="box-title">
+                                    <button type="button" class="btn btn-success" id="btnAdd" ng-click="AddClick(true)">Add</button>
+                                </div>
 
-                            <div class="box-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" ng-model="filterValue">
+                                <div class="box-tools">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" ng-model="filterValue">
 
-                                    <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <table class="table table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>Mobile</th>
-                                        <th>Phone</th>
-                                        <th>Description</th>
-                                        <th></th>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Address</th>
+                                            <th>Mobile</th>
+                                            <th>Phone</th>
+                                            <th>Description</th>
+                                            <th></th>
 
-                                    </tr>
-                                    <tr ng-repeat="emps in employees | filter: filterValue |  orderBy: 'Name '">
-                                        <td>
-                                            {{emps.EmpId}}
-                                        </td>
-                                        <td>
-                                            {{emps.Name}}
-                                        </td>
-                                        <td>
-                                            {{emps.Address}}
-                                        </td>
-                                        <td>
-                                            {{emps.Phone}}
-                                        </td>
-                                        <td>
-                                            {{emps.Mobile}}
-                                        </td>
-                                        <td>
-                                            {{emps.Description}}
-                                        </td>
-                                        <td>
-                                            <span ng-click="editClick(emps)" class="btn btn-info">Edit</span>
-                                            <span ng-click="deleteClick(emps)" class="btn btn-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                        </tr>
+                                        <tr ng-repeat="emps in employees | filter: filterValue |  orderBy: 'Name '">
+                                            <td>
+                                                {{emps.EmpId}}
+                                            </td>
+                                            <td>
+                                                {{emps.Name}}
+                                            </td>
+                                            <td>
+                                                {{emps.Address}}
+                                            </td>
+                                            <td>
+                                                {{emps.Phone}}
+                                            </td>
+                                            <td>
+                                                {{emps.Mobile}}
+                                            </td>
+                                            <td>
+                                                {{emps.Description}}
+                                            </td>
+                                            <td>
+                                                <span ng-click="EditClick(emps)" class="btn btn-info">Edit</span>
+                                                <span ng-click="DeleteClick(emps)" class="btn btn-danger">Delete</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer clearfix">
+                                <ul class="pagination pagination-sm no-margin pull-right">
+                                    <li><a href="#">«</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">»</a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer clearfix">
-                            <ul class="pagination pagination-sm no-margin pull-right">
-                                <li><a href="#">«</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">»</a></li>
-                            </ul>
-                        </div>
+                        <!-- /.box -->
                     </div>
-                    <!-- /.box -->
-                </div>
-            </div>
+                </div>*@
 
         </div>
         @Html.Partial("_CommonWindows")
     </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="box-title">
+                        <button type="button" class="btn btn-success" id="btnAdd" ng-click="AddClick(true)">Add</button>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                        <span class="input-group-addon">.00</span>
+                    </div>
+
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" ng-change="SearchGrid()" ng-model="filterValue">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" ng-click="ClearSearch()"><i ng-class="filterValue ? 'fa fa-close' : 'fa fa-search'"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="empGrid" class="gridStyle" ui-grid="gridOptions"></div>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer clearfix">
+
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+
+    @*------------------- Modal popup*@
     <div class="modal fade" id="empModal" role="dialog">
         <div class="modal-dialog">
 
@@ -100,7 +136,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add</h4>
+                    <h4 class="modal-title">{{ popupTitle}}</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" id="myForm">
@@ -143,11 +179,9 @@
 
         </div>
     </div>
-    <div id="grid1" class="gridStyle" ui-grid="gridOpts"></div>
-    @*<div id="grid1" ui-grid="gridOptions1" class="grid"></div>*@
 
 </body>
-@*------------------- Modal popup*@
+
 
 
 
