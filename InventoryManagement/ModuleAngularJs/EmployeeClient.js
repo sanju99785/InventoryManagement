@@ -2,11 +2,26 @@
 
 EmployeeApp.controller('EmployeeController', function ($scope, $filter, EmployeeService) {
     $scope.EmployeeId = 0;
+    $scope.noOfRecord = 0;
 
+
+    $scope.update = function (user) {
+        $scope.master = angular.copy(user);
+    };
+
+    $scope.reset = function (form) {
+        if (form) {
+            form.$setPristine();
+            form.$setUntouched();
+        }
+        $scope.user = angular.copy($scope.master);
+    };
+
+    $scope.reset();
     $scope.GetEmployee = function () {
         $('#loader').show();
         $scope.gridOptions.data = [];
-        if (typeof  $scope.filterValue === 'undefined') {
+        if (typeof $scope.filterValue === 'undefined') {
             $scope.filterValue = "";
         }
 
@@ -15,23 +30,23 @@ EmployeeApp.controller('EmployeeController', function ($scope, $filter, Employee
             $('#loader').hide();
             $scope.employees = data.Table;
             $scope.gridOptions.data = data.Table;
+            $scope.noOfRecord = $scope.gridOptions.data.length;
         })
          .error(function (error) {
-
              $('#loader').hide();
-             $scope.status = 'Unable to load Student data: ' + error.message;
          });
     };
 
-
     $scope.SearchGrid = function () {
-        debugger;
         $scope.gridOptions.data = $filter('filter')($scope.employees, $scope.filterValue, undefined);
+        $scope.noOfRecord = $scope.gridOptions.data.length;
     };
 
     $scope.gridOptions = {
         enableSorting: true,
         rowHeight: 40,
+        headerRowHeight: 40,
+        footerRowHeight: 40,
         enableHighlighting: true,
         columnDefs: [
                               { field: 'Name', displayName: 'Name' },
@@ -40,7 +55,7 @@ EmployeeApp.controller('EmployeeController', function ($scope, $filter, Employee
                               { field: 'Mobile', displayName: 'Mobile' },
                               { field: 'Description', displayName: 'Description' },
                                {
-                                   field: 'EmpId', name: "", enableSorting: false,
+                                   field: 'EmpId', name: "", enableSorting: false, width: 140,
                                    cellTemplate: '<div class="action-button-padding"><span ng-click="grid.appScope.EditClick(row.entity)" class="action-button-margin btn btn-info ">Edit</span><span ng-click="grid.appScope.DeleteClick(row.entity)" class="action-button-margin btn btn-danger">Delete</span></div> '
                                }
         ],
@@ -53,7 +68,6 @@ EmployeeApp.controller('EmployeeController', function ($scope, $filter, Employee
         $scope.popupTitle = "Add";//// Set Title Popup
         $('#empModal').modal('show');
     }
-
 
     $scope.EditClick = function (emps) {
 
@@ -74,6 +88,13 @@ EmployeeApp.controller('EmployeeController', function ($scope, $filter, Employee
     }
 
     $scope.AddUpdateEmployee = function () {
+        if (!$scope.empForm.$valid) {
+            return;
+        }
+        if (!$scope.empForm.$dirty) { //// If form is untuched
+            $('#empModal').modal('hide');
+            return;
+        }
         var emp = {
             EmpId: $scope.EmpId,
             name: $scope.Name,
@@ -91,7 +112,13 @@ EmployeeApp.controller('EmployeeController', function ($scope, $filter, Employee
                 getData.then(function (msg) {
                     $('#empModal').modal('hide');
                     $('#loader').hide();
-                    ShowSuccess(RecordCreatedSuccess);
+                    if (emp.EmpId > 0) {
+                        ShowSuccess(RecordUpdateSuccess);
+                    }
+                    else {
+                        ShowSuccess(RecordCreatedSuccess);
+                    }
+
                     $scope.GetEmployee();
                 }, function () {
                     $('#loader').hide();
@@ -130,6 +157,7 @@ EmployeeApp.controller('EmployeeController', function ($scope, $filter, Employee
 
     $scope.ClearSearch = function () {
         $scope.filterValue = "";
+        $scope.noOfRecord = 0;
         $scope.gridOptions.data = $filter('filter')($scope.employees, "", undefined);
     }
     $scope.Clear = function () {
@@ -139,5 +167,10 @@ EmployeeApp.controller('EmployeeController', function ($scope, $filter, Employee
         $scope.Phone = "";
         $scope.Mobile = "";
         $scope.Description = "";
+        $scope.empForm.$setUntouched();
+        $scope.empForm.$setPristine();
     }
+
+    $scope.GetEmployee();////Initialize Grid data
 })
+

@@ -54,12 +54,7 @@
     }
 /*Warning*/
 
-/*ng-grid*/
-.gridStyle {
-    border: 1px solid rgb(212,212,212);
-    width: 100%;
-    height: 300px;
-}
+
 
 /*Fixed Postion*/
 .afix {
@@ -74,4 +69,33 @@
 
 .action-button-padding {
     padding: 2%;
+}
+
+.ui-grid-top-panel {
+    background: #eeeeee !important;
+}
+
+.search-box-border {
+    border-color: #00acd6 !important;
+}
+
+.gridStyle {
+    border: 1px solid rgb(212,212,212);
+    width: 100%;
+    height: 332px;
+}
+
+
+.search-box {
+    margin-top: 2% !important;
+}
+
+/* Popup Error*/
+.error-message {
+    color: #dd4b39;
+}
+
+.error-button {
+    background-color: #8C9691 !important;
+    border-color: #656966 !important;
 }

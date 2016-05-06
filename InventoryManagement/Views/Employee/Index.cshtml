@@ -8,86 +8,7 @@
 <html>
 <body ng-controller="EmployeeController" ng-app="EmployeeApp">
     <div>
-
         <br />
-
-        <div data-ng-init="GetEmployee()">
-
-            @*<div class="row">
-                    <div class="col-xs-12">
-                        <div class="box">
-                            <div class="box-header">
-                                <div class="box-title">
-                                    <button type="button" class="btn btn-success" id="btnAdd" ng-click="AddClick(true)">Add</button>
-                                </div>
-
-                                <div class="box-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" ng-model="filterValue">
-
-                                        <div class="input-group-btn">
-                                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <table class="table table-bordered">
-                                    <tbody>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Name</th>
-                                            <th>Address</th>
-                                            <th>Mobile</th>
-                                            <th>Phone</th>
-                                            <th>Description</th>
-                                            <th></th>
-
-                                        </tr>
-                                        <tr ng-repeat="emps in employees | filter: filterValue |  orderBy: 'Name '">
-                                            <td>
-                                                {{emps.EmpId}}
-                                            </td>
-                                            <td>
-                                                {{emps.Name}}
-                                            </td>
-                                            <td>
-                                                {{emps.Address}}
-                                            </td>
-                                            <td>
-                                                {{emps.Phone}}
-                                            </td>
-                                            <td>
-                                                {{emps.Mobile}}
-                                            </td>
-                                            <td>
-                                                {{emps.Description}}
-                                            </td>
-                                            <td>
-                                                <span ng-click="EditClick(emps)" class="btn btn-info">Edit</span>
-                                                <span ng-click="DeleteClick(emps)" class="btn btn-danger">Delete</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer clearfix">
-                                <ul class="pagination pagination-sm no-margin pull-right">
-                                    <li><a href="#">«</a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">»</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /.box -->
-                    </div>
-                </div>*@
-
-        </div>
         @Html.Partial("_CommonWindows")
     </div>
 
@@ -99,20 +20,15 @@
                     <div class="box-title">
                         <button type="button" class="btn btn-success" id="btnAdd" ng-click="AddClick(true)">Add</button>
                     </div>
-
-                    <div class="input-group">
-                        <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                        <span class="input-group-addon">.00</span>
-                    </div>
-
                     <div class="box-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" ng-change="SearchGrid()" ng-model="filterValue">
-                            <div class="input-group-btn">
-                                <button class="btn btn-default" ng-click="ClearSearch()"><i ng-class="filterValue ? 'fa fa-close' : 'fa fa-search'"></i></button>
+                        <div class="input-group input-group-sm search-box" style="width: 200px;">
+                            <div class="input-group">
+                                <span class="input-group-addon" ng-class="filterValue ? 'search-box-border' : ''">{{noOfRecord}}</span>
+                                <input type="text" class="form-control " ng-class="filterValue ? 'search-box-border' : ''" ng-change="SearchGrid()" ng-model="filterValue">
+                                <span class="input-group-addon btn btn-default" ng-class="filterValue ? 'search-box-border' : ''" ng-click="ClearSearch()"><i ng-class="filterValue ? 'fa fa-close' : 'fa fa-search'"></i></span>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -130,60 +46,74 @@
 
     @*------------------- Modal popup*@
     <div class="modal fade" id="empModal" role="dialog">
-        <div class="modal-dialog">
+        <form name="empForm" novalidate>
+            <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">{{ popupTitle}}</h4>
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{ popupTitle}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="Name" name="Name" required="">
+                                    <div ng-show="empForm.$submitted || empForm.Name.$touched">
+                                        <div ng-show="empForm.Name.$error.required" class="error-message">Please enter Name</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Address</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" rows="3" placeholder="Enter ..." ng-model="Address"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Mobile</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-minlength="10" ng-maxlength="10" ng-pattern="/^(0|[1-9][0-9]*)$/" ng-model="Mobile" name="Mobile" required>
+                                    <div ng-show="empForm.$submitted || empForm.Mobile.$touched">
+                                        <div ng-show="empForm.Mobile.$error.required" class="error-message">Please enter Mobile Number</div>
+                                        <div ng-show="empForm.Mobile.$error.pattern" class="error-message">Please enter valid Mobile Number</div>
+                                        <div ng-show="empForm.Mobile.$error.maxlength" class="error-message">Mobile Number should be 10 characters long.</div>
+                                        <div ng-show="empForm.Mobile.$error.minlength" class="error-message">Mobile Number should be 10 characters long.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Phone</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-pattern="/^(0|[1-9][0-9]*)$/" maxlength="12" ng-model="Phone" name="Phone">
+                                    <div ng-show="empForm.$submitted || empForm.Phone.$touched">
+                                        <div ng-show="empForm.Phone.$error.pattern" class="error-message">Please enter valid Mobile</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Description</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" rows="3" placeholder="Enter ..." ng-model="Description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" ng-class="" id="btnAdd" ng-click="AddUpdateEmployee()">Save</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" id="myForm">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" ng-model="Name" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Address</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" rows="3" placeholder="Enter ..." ng-model="Address"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Mobile</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" maxlength="12" ng-model="Mobile">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Phone</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" maxlength="12" ng-model="Phone">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Description</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" rows="3" placeholder="Enter ..." ng-model="Description"></textarea>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" id="btnAdd" ng-click="AddUpdateEmployee()">Save</button>
-                </div>
+
             </div>
-
-        </div>
+        </form>
     </div>
 
+
 </body>
-
-
-
-
 </html>
+
+
 
